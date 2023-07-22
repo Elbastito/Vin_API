@@ -2,6 +2,7 @@
 /* Para arrancar el servidor usar "npm run start" */
 const express = require("express");
 const main = express();
+require("dotenv").config()
 const rutaParaNotas = require("./rutas/rutasParaNotas");
 const conexionDB= require("./config/conexiondb");
 const cors = require('cors');
