@@ -49,18 +49,20 @@ async function crearNota(req,res){
 async function ajustarNota(req, res) {
     const idACambiar = req.params.ID;
     try {
-      // Utilizamos el método findOneAndUpdate con la opción { $set: req.body } para realizar una actualización parcial
       const cambiadaNota = await modeloNotas.findOneAndUpdate(
-        { _id: idACambiar },
-        { $set: req.body }, // Utilizamos "$set" para actualizar solo los campos proporcionados en el cuerpo de la solicitud
-        { new: true, runValidators: true }
+        { _id: idACambiar }, // Filtro para encontrar el documento a actualizar por su ID
+        req.body, // Objeto con los campos a actualizar y sus nuevos valores (enviados desde el cliente)
+        {
+          new: true, // Devuelve el documento actualizado en lugar del original
+          runValidators: true, // Ejecuta las validaciones del esquema durante la actualización
+        }
       );
   
-      res.send(cambiadaNota);
+      res.send(cambiadaNota); // Enviamos el documento actualizado como respuesta al cliente
     } catch (error) {
-      res.send(error);
+      res.send(error); // Si ocurre un error, enviamos el error como respuesta al cliente
     }
-  }
+}
 
 async function borrarNota(req,res){
     const idABorrar = req.params.ID;
