@@ -46,19 +46,21 @@ async function crearNota(req,res){
     }
 }
 
-async function ajustarNota(req,res){
-    const idACambiar = req.params.ID;
-    try{
-        const cambiadaNota = await modeloNotas.findOneAndUpdate({
-            _id: idACambiar},req.body,{
-                new: true,
-                runValidators: true,
-            });
-        res.send(cambiadaNota);
-    }catch(error){
-        res.send(error);
-    }
+async function ajustarNota(req, res) {
+  const idACambiar = req.params.ID; // Obtenemos el ID del documento desde los parámetros de la ruta
+  try {
+    const cambiadaNota = await modeloNotas.findOneAndUpdate(
+        { _id: idACambiar },
+        { $set: req.body }, // Utilizamos "$set" para actualizar solo los campos proporcionados en el cuerpo de la solicitud
+        { new: true, runValidators: true }
+    );
+
+    res.send(cambiadaNota); // Enviamos el documento actualizado como respuesta al cliente
+  } catch (error) {
+    res.send(error); // Si ocurre un error, enviamos el error como respuesta al cliente
+  }
 }
+
 
 async function borrarNota(req,res){
     const idABorrar = req.params.ID;
