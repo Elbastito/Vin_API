@@ -8,13 +8,13 @@ const conexionDB= require("./config/conexiondb");
 const cors = require('cors');
 
 main.use(express.json());
-main.use(cors());
+/* main.use(cors());
 
 // Configurar CORS para permitir solicitudes desde https://vin-m2m3.onrender.com
 main.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://vin-m2m3.onrender.com');
   next();
-});
+}); */
 
 //Rutas
 main.get("/",(req,res)=>{
