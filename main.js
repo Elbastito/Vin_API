@@ -11,7 +11,7 @@ main.use(express.json());
 main.use(cors());
 
 // Configurar CORS para permitir solicitudes desde https://vin-m2m3.onrender.com
-app.use((req, res, next) => {
+main.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://vin-m2m3.onrender.com');
   next();
 });
